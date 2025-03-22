@@ -12,3 +12,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
+
+Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+
+Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
