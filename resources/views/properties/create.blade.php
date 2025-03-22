@@ -1,56 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Property</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>Add New Property</h1>
+@section('content')
+<div class="form-container">
+    <h2 class="text-center mb-4">Add New Property</h2>
 
     <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        @csrf
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
         </div>
-    @endif
 
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" value="{{ old('title') }}" required><br><br>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" name="description" class="form-control" required>{{ old('description') }}</textarea>
+        </div>
 
-    <label for="description">Description:</label><br>
-    <textarea id="description" name="description" required>{{ old('description') }}</textarea><br><br>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="bedrooms" class="form-label">No. of Bedrooms:</label>
+                <input type="number" id="bedrooms" name="bedrooms" class="form-control" value="{{ old('bedrooms') }}" required>
+            </div>
+            <div class="col-md-6">
+                <label for="bathrooms" class="form-label">No. of Bathrooms:</label>
+                <input type="number" id="bathrooms" name="bathrooms" class="form-control" value="{{ old('bathrooms') }}" step="0.5" required>
+            </div>
+        </div>
 
-    <label for="bedrooms">No. of Bedrooms:</label><br>
-    <input type="number" id="bedrooms" name="bedrooms" value="{{ old('bedrooms') }}" required><br><br>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" name="price" class="form-control" value="{{ old('price') }}" step="0.01" required>
+            </div>
+            <div class="col-md-6">
+                <label for="type" class="form-label">Type:</label>
+                <select id="type" name="type" class="form-control" required>
+                    <option value="House" {{ old('type') == 'House' ? 'selected' : '' }}>House</option>
+                    <option value="Apartment" {{ old('type') == 'Apartment' ? 'selected' : '' }}>Apartment</option>
+                </select>
+            </div>
+        </div>
 
-    <label for="bathrooms">No. of Bathrooms:</label><br>
-    <input type="number" id="bathrooms" name="bathrooms" value="{{ old('bathrooms') }}" step="0.5" required><br><br>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" id="location" name="location" class="form-control" value="{{ old('location') }}" required>
+        </div>
 
-    <label for="price">Price:</label><br>
-    <input type="number" id="price" name="price" value="{{ old('price') }}" step="0.01" required><br><br>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo:</label>
+            <input type="file" id="photo" name="photo" class="form-control" required>
+        </div>
 
-    <label for="location">Location:</label><br>
-    <input type="text" id="location" name="location" value="{{ old('location') }}" required><br><br>
-
-    <label for="type">Type:</label><br>
-    <select id="type" name="type" required>
-        <option value="House" {{ old('type') == 'House' ? 'selected' : '' }}>House</option>
-        <option value="Apartment" {{ old('type') == 'Apartment' ? 'selected' : '' }}>Apartment</option>
-    </select><br><br>
-
-    <label for="photo">Photo:</label><br>
-    <input type="file" id="photo" name="photo" required><br><br>
-
-    <button type="submit">Add Property</button>
-</form>
-
-    </body>
-</html>
+        <button type="submit" class="btn btn-primary">Add Property</button>
+    </form>
+</div>
+@endsection

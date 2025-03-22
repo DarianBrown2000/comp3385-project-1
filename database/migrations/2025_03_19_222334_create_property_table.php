@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('title'); 
             $table->text('description'); 
             $table->integer('bedrooms'); 
-            $table->decimal('bathrooms'); 
+            $table->decimal('bathrooms',3, 1); 
             $table->string('location'); 
-            $table->decimal('price', 15, 2); 
+            $table->decimal('price', 10, 2); 
             $table->string('type'); 
             $table->string('photo'); 
             $table->timestamps(); 
