@@ -27,11 +27,23 @@
         .form-container .btn-primary {
             width: 100%;
         }
+
+        /* New Header Styles */
+        .navbar-custom {
+            background-color: #20c997; /* Teal background color */
+            padding: 1rem 0; /* Add padding to the top and bottom */
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white !important; /* White text */
+        }
+        .navbar-custom .nav-link.active {
+            font-weight: bold; /* Make the active link bold */
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-custom"> <div class="container">
             <a class="navbar-brand" href="#">COMP3385</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,16 +51,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/about') }}">About</a>
+                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ url('/about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/properties/create') }}">New Property</a>
+                        <a class="nav-link {{ request()->is('properties/create') ? 'active' : '' }}" href="{{ url('/properties/create') }}">New Property</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/properties') }}">Properties</a>
+                        <a class="nav-link {{ request()->is('properties') ? 'active' : '' }}" href="{{ url('/properties') }}">Properties</a>
                     </li>
                 </ul>
             </div>
